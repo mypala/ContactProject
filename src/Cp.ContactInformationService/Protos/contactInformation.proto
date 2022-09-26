@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cp.ContactInformationService.Protos";
+
+package contactInformation;
+
+service ContactInformationService {
+  rpc Get(InformationId) returns(ContactInformation);
+  rpc GetAll(GetAllRequest) returns(ListOfInformation);
+  rpc Post(ContactInformation) returns(ContactInformation);
+  rpc Put(ContactInformation) returns(ContactInformation);
+  rpc Delete(InformationId) returns(Response);
+}
+
+message GetAllRequest {
+    int64 contactId = 1;
+}
+message InformationId {
+    int64 UUID = 1;
+}
+
+enum InformationType {
+    None = 0;
+    Phone = 1;
+    Mail = 2;
+    Location = 3;
+}
+
+message ContactInformation {
+    int64 UUID = 1;
+    int64 ContactId = 2;
+    InformationType InformationType = 3;
+    string Content = 4;
+}
+
+message ListOfInformation {
+    repeated ContactInformation Informations = 1;
+}
+
+message Response {
+    int32 Code = 1;
+    string Message = 2;
+}
