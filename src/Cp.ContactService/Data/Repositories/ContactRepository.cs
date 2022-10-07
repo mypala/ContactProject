@@ -16,6 +16,11 @@ namespace Cp.ContactService.Data.Repositories
             return _context.Contacts.FirstOrDefault(x => x.UUID == uuid);
         }
 
+        public async Task<ContactModel> GetLast()
+        {
+            return _context.Contacts.LastOrDefault();
+        }
+
         public async Task<IEnumerable<ContactModel>> GetAll()
         {
             return _context.Contacts;
